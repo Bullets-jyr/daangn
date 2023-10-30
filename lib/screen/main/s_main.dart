@@ -14,8 +14,10 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.home;
-  final tabs = [TabItem.home, TabItem.favorite];
-  final List<GlobalKey<NavigatorState>> navigatorKeys = [];
+  // final tabs = [TabItem.home, TabItem.favorite];
+  final tabs = TabItem.values;
+  // final List<GlobalKey<NavigatorState>> navigatorKeys = [];
+  final List<GlobalKey<NavigatorState>> navigatorKeys = TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
 
   int get _currentIndex => tabs.indexOf(_currentTab);
 
@@ -28,7 +30,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   @override
   void initState() {
     super.initState();
-    initNavigatorKeys();
+    // initNavigatorKeys();
   }
 
   @override
@@ -149,9 +151,9 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     }
   }
 
-  void initNavigatorKeys() {
-    for (final _ in tabs) {
-      navigatorKeys.add(GlobalKey<NavigatorState>());
-    }
-  }
+  // void initNavigatorKeys() {
+  //   for (final _ in tabs) {
+  //     navigatorKeys.add(GlobalKey<NavigatorState>());
+  //   }
+  // }
 }

@@ -110,6 +110,11 @@ flutter:
     - assets/image/icon/
     - assets/image/flag/
     - assets/image/darkmode/
+    - assets/image/fab/
+    - assets/image/detail/
+    - assets/image/home/
+    - assets/image/notification/
+    - assets/image/write/
     - assets/translations/
     - assets/
 
