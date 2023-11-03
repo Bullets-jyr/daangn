@@ -1,3 +1,4 @@
+import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
@@ -7,28 +8,37 @@ import '../../common/common.dart';
 import 'fab/w_floating_daangn_button.dart';
 import 'w_menu_drawer.dart';
 
-class MainScreen extends StatefulWidget {
+final currentTabProvider = StateProvider<TabItem>((ref) => TabItem.home);
+
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => MainScreenState();
+  ConsumerState<MainScreen> createState() => MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
-  TabItem _currentTab = TabItem.home;
+class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProviderStateMixin {
+
   // final tabs = [TabItem.home, TabItem.favorite];
   final tabs = TabItem.values;
-  // final List<GlobalKey<NavigatorState>> navigatorKeys = [];
-  final List<GlobalKey<NavigatorState>> navigatorKeys = TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
 
+  // final List<GlobalKey<NavigatorState>> navigatorKeys = [];
+  final List<GlobalKey<NavigatorState>> navigatorKeys =
+      TabItem.values.map((e) => GlobalKey<NavigatorState>()).toList();
+
+  // TabItem get _currentTab => ref.read(currentTabProvider);
+  TabItem get _currentTab => ref.watch(currentTabProvider);
   int get _currentIndex => tabs.indexOf(_currentTab);
 
-  GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
+  GlobalKey<NavigatorState> get _currentTabNavigationKey =>
+      navigatorKeys[_currentIndex];
 
   bool get extendBody => true;
 
   static double get bottomNavigationBarBorderRadius => 30.0;
   static const bottomNavigationBarHeight = 95.0;
+
+  bool isFabExpanded = false;
 
   @override
   void initState() {
@@ -38,30 +48,37 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: WillPopScope(
-        onWillPop: _handleBackPressed,
-        child: Material(
-          // Stack: 내부에는 Material이 없기 때문에 Material위젯으로 감싸야합니다.
-          child: Stack(
-            children: [
-              // Scaffold: 내부에는 Material이 이미 적용되어있습니다.
-              Scaffold(
-                extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
-                drawer: const MenuDrawer(),
-                body: Container(
-                  color: context.appColors.seedColor.getMaterialColorValues[200],
-                  padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
-                  child: SafeArea(
-                    bottom: !extendBody,
-                    child: pages,
-                  ),
+    return WillPopScope(
+      onWillPop: _handleBackPressed,
+      child: Material(
+        // Stack: 내부에는 Material이 없기 때문에 Material위젯으로 감싸야합니다.
+        child: Stack(
+          children: [
+            // Scaffold: 내부에는 Material이 이미 적용되어있습니다.
+            Scaffold(
+              extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
+              drawer: const MenuDrawer(),
+              body: Container(
+                color:
+                    context.appColors.seedColor.getMaterialColorValues[200],
+                padding: EdgeInsets.only(
+                    bottom: extendBody
+                        ? 60 - bottomNavigationBarBorderRadius
+                        : 0),
+                child: SafeArea(
+                  bottom: !extendBody,
+                  child: pages,
                 ),
-                bottomNavigationBar: _buildBottomNavigationBar(context),
               ),
-              FloatingDaangnButton(),
-            ],
-          ),
+              bottomNavigationBar: _buildBottomNavigationBar(context),
+            ),
+            // if (_currentTab != TabItem.chat)
+            AnimatedOpacity(
+              opacity: _currentTab != TabItem.chat ? 1 : 0,
+              child: FloatingDaangnButton(),
+              duration: 300.ms,
+            ),
+          ],
         ),
       ),
     );
@@ -120,10 +137,13 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   }
 
   List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
+    // final currentTab = ref.watch(currentTabProvider);
+    // final currentIndex = tabs.indexOf(currentTab);
     return tabs
         .mapIndexed(
           (tab, index) => tab.toNavigationBarItem(
             context,
+            // isActivated: currentIndex == index,
             isActivated: _currentIndex == index,
           ),
         )
@@ -131,18 +151,21 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   }
 
   void _changeTab(int index) {
-    setState(() {
-      _currentTab = tabs[index];
-    });
+    ref.read(currentTabProvider.notifier).state = tabs[index];
+    // setState(() {
+    //   _currentTab = tabs[index];
+    // });
   }
 
-  BottomNavigationBarItem bottomItem(
-      bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(bool activate, IconData iconData,
+      IconData inActivateIconData, String label) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),
           activate ? iconData : inActivateIconData,
-          color: activate ? context.appColors.iconButton : context.appColors.iconButtonInactivate,
+          color: activate
+              ? context.appColors.iconButton
+              : context.appColors.iconButtonInactivate,
         ),
         label: label);
   }
@@ -166,9 +189,9 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     }
   }
 
-  // void initNavigatorKeys() {
-  //   for (final _ in tabs) {
-  //     navigatorKeys.add(GlobalKey<NavigatorState>());
-  //   }
-  // }
+// void initNavigatorKeys() {
+//   for (final _ in tabs) {
+//     navigatorKeys.add(GlobalKey<NavigatorState>());
+//   }
+// }
 }

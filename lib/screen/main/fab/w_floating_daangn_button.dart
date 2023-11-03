@@ -3,6 +3,7 @@ import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart'
 import 'package:fast_app_base/common/widget/animated_width_collapse.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -63,7 +64,23 @@ class FloatingDaangnButton extends ConsumerWidget {
                 onTap: () {
                   // ref.read(floatingButtonExpandedProvider.notifier).state = !isExpanded;
                   // ref.read(floatingButtonIsSmallProvider.notifier).state = !isSmall;
-                  ref.read(floatingButtonStateProvider.notifier).onTapButton();
+
+                  // final currentTab = ref.read(currentTabProvider);
+                  // debugPrint(currentTab.tabName);
+                  // switch(currentTab) {
+                  //   case TabItem.home:
+                  //     // TODO: Handle this case.
+                  //   case TabItem.localLife:
+                  //     // TODO: Handle this case.
+                  //   case TabItem.nearMe:
+                  //     // TODO: Handle this case.
+                  //   case TabItem.chat:
+                  //     // TODO: Handle this case.
+                  //   case TabItem.my:
+                  //     // TODO: Handle this case.
+                  // }
+
+                  ref.read(floatingButtonStateProvider.notifier).toggleMenu();
                 },
                 child: AnimatedContainer(
                   duration: duration,
@@ -91,12 +108,12 @@ class FloatingDaangnButton extends ConsumerWidget {
                       // if (!isSmall) '글쓰기'.text.make(),
                     ],
                   ),
-                ).pOnly(
-                    bottom: MainScreenState.bottomNavigationBarHeight +
-                        context.viewPaddingBottom +
-                        10,
-                    right: 20),
-              ),
+                ),
+              ).pOnly(
+                  bottom: MainScreenState.bottomNavigationBarHeight +
+                      context.viewPaddingBottom +
+                      10,
+                  right: 20),
             ],
           ),
         ),
