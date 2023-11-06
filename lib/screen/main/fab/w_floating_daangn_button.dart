@@ -3,11 +3,12 @@ import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart'
 import 'package:fast_app_base/common/widget/animated_width_collapse.dart';
 import 'package:fast_app_base/screen/main/fab/w_floating_daangn_button.riverpod.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
-import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FloatingDaangnButton extends ConsumerWidget {
+  static const height = 100.0;
+
   FloatingDaangnButton({super.key});
 
   final duration = 300.ms;

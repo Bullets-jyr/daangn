@@ -2,6 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_product_post.dart';
 import 'package:fast_app_base/entity/product/product_status.dart';
 import 'package:fast_app_base/entity/product/vo_product.dart';
+import 'package:fast_app_base/entity/user/vo_address.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
 
 String picSum(int id) {
@@ -74,7 +75,7 @@ final post1 = ProductPost(
   product1.user,
   product1,
   '글의 내용입니다.',
-  '서울시 특별한 주소',
+  const Address('서울시 특별한 주소', '앱동'),
   3,
   2,
   DateTime.now().subtract(30.minutes),
@@ -84,7 +85,7 @@ final post2 = ProductPost(
   product2.user,
   product2,
   '글의 내용입니다.',
-  '서울시 특별한 주소',
+  const Address('서울시 특별한 주소', '플러터동'),
   30,
   120,
   DateTime.now().subtract(5.minutes),
@@ -94,7 +95,7 @@ final post3 = ProductPost(
   product3.user,
   product3,
   '글의 내용입니다.',
-  '서울시 특별한 주소',
+  const Address('서울시 특별한 주소', '다트시'),
   30,
   120,
   DateTime.now().subtract(10.seconds),
