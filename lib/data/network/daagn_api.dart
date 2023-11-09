@@ -20,13 +20,21 @@ class DaangnApi {
     return SimpleResult.success(notificationList);
   }
 
-  static Future<SimpleResult<ProductPost, ApiError>> getPost(int id) async {
+  // static Future<SimpleResult<ProductPost, ApiError>> getPost(int id) async {
+  //   await sleepAsync(500.ms);
+  //   return SimpleResult.success(
+  //     ProductPost(
+  //       simpleProductPost: post1,
+  //       content: '깨끗하게 잘 쓰던 물건이에요. 잘 쓰면 좋겠습니다. 감사합니다.',
+  //     ),
+  //   );
+  // }
+
+  static Future<ProductPost> getPost(int id) async {
     await sleepAsync(500.ms);
-    return SimpleResult.success(
-      ProductPost(
-        simpleProductPost: post1,
-        content: '깨끗하게 잘 쓰던 물건이에요. 잘 쓰면 좋겠습니다. 감사합니다.',
-      ),
+    return ProductPost(
+      simpleProductPost: post1,
+      content: '깨끗하게 잘 쓰던 물건이에요. 잘 쓰면 좋겠습니다. 감사합니다.',
     );
   }
 }
