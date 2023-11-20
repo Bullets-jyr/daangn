@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
+import 'package:fast_app_base/screen/dialog/d_color_bottom.dart';
+import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:nav/enum/enum_nav_ani.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ProductPostItem extends StatelessWidget {
@@ -13,14 +16,42 @@ class ProductPostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tap(
+      // return GestureDetector(
+      //   behavior: HitTestBehavior.translucent,
+      //   onTapUp: (details) {
+      //     Nav.pushWithRippleEffect(
+      //       PostDetailScreen(
+      //         post.id,
+      //         simpleProductPost: post,
+      //       ),
+      //       offset: Offset(details.globalPosition.dx, details.globalPosition.dy),
+      //       durationMs: 800
+      //     );
+      //   },
       onTap: () {
         // 상세페이지
         Nav.push(
+        // // Nav.pushReplacement(
           PostDetailScreen(
             post.id,
             simpleProductPost: post,
           ),
+          context: context,
+          durationMs: 800,
+        //   // navAni: NavAni.Ripple,
         );
+
+        // iOS: 스와이프 백 방지
+        // Nav.pushFromRight(
+        //   PostDetailScreen(
+        //     post.id,
+        //     simpleProductPost: post,
+        //   ),
+        //   prohibitSwipeBack: true,
+        // );
+
+        // MessageDialog('안녕하세요', context: context,).show(useRootNavigator: false);
+        // ColorBottomSheet('안녕', context: context,).show();
       },
       child: Stack(
         children: [

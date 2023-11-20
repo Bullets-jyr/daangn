@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fast_app_base/common/dart/extension/num_duration_extension.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
@@ -58,6 +60,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
             Scaffold(
               extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
               drawer: const MenuDrawer(),
+              drawerEnableOpenDragGesture: !Platform.isIOS,
               body: Container(
                 // color: context.appColors.seedColor.getMaterialColorValues[200],
                 padding: EdgeInsets.only(
