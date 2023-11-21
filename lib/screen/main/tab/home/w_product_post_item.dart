@@ -31,14 +31,14 @@ class ProductPostItem extends StatelessWidget {
       onTap: () {
         // 상세페이지
         Nav.push(
-        // // Nav.pushReplacement(
+          // // Nav.pushReplacement(
           PostDetailScreen(
             post.id,
             simpleProductPost: post,
           ),
           context: context,
           durationMs: 800,
-        //   // navAni: NavAni.Ripple,
+          //   // navAni: NavAni.Ripple,
         );
 
         // iOS: 스와이프 백 방지
@@ -61,9 +61,12 @@ class ProductPostItem extends StatelessWidget {
               ClipRRect(
                 // borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10),),
                 borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  imageUrl: post.product.images[0],
-                  width: 150,
+                child: Hero(
+                  tag: '${post.id}_${post.product.images[0]}',
+                  child: CachedNetworkImage(
+                    imageUrl: post.product.images[0],
+                    width: 150,
+                  ),
                 ),
               ),
               Width(10),
@@ -73,7 +76,13 @@ class ProductPostItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // post.content.text.size(17).bold.make(),
-                    post.title.text.size(17).bold.make(),
+                    Hero(
+                      tag: '${post.id}_title',
+                      // child: post.title.text.size(17).bold.make(),
+                      child: Material(
+                        child: post.title.text.size(17).bold.make(),
+                      ),
+                    ),
                     Row(
                       children: [
                         post.address.simpleAddress.text
