@@ -5,6 +5,7 @@ import 'package:fast_app_base/screen/dialog/d_color_bottom.dart';
 import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
 import 'package:flutter/material.dart';
+
 import 'package:nav/enum/enum_nav_ani.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -30,16 +31,19 @@ class ProductPostItem extends StatelessWidget {
       //   },
       onTap: () {
         // 상세페이지
-        Nav.push(
-          // // Nav.pushReplacement(
-          PostDetailScreen(
-            post.id,
-            simpleProductPost: post,
-          ),
-          context: context,
-          durationMs: 800,
-          //   // navAni: NavAni.Ripple,
-        );
+        // context.go('/main/localLife/${post.id}');
+        context.go('/main/localLife/${post.id}', extra: post);
+
+        // Nav.push(
+        //   // // Nav.pushReplacement(
+        //   PostDetailScreen(
+        //     post.id,
+        //     simpleProductPost: post,
+        //   ),
+        //   context: context,
+        //   durationMs: 800,
+        //   //   // navAni: NavAni.Ripple,
+        // );
 
         // iOS: 스와이프 백 방지
         // Nav.pushFromRight(
