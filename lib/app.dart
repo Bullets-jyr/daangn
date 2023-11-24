@@ -7,6 +7,7 @@ import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/post_detail/s_post_detail.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -145,6 +146,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print('Lifecycles: ${describeEnum(state)}');
     switch (state) {
       case AppLifecycleState.resumed:
         App.isForeground = true;
