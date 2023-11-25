@@ -3,6 +3,7 @@ import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timeago/timeago.dart';
 
 import 'app.dart';
@@ -25,5 +26,5 @@ void main() async {
       fallbackLocale: const Locale('ko'),
       path: 'assets/translations',
       useOnlyLangCode: true,
-      child: const App()));
+      child: ProviderScope(child: const App())));
 }

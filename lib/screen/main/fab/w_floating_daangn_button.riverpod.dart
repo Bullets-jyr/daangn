@@ -5,7 +5,7 @@ final floatingButtonStateProvider =
     StateNotifierProvider<FloatingButtonStateNotifier, FloatingButtonState>(
   (ref) => FloatingButtonStateNotifier(
     // FloatingButtonState(),
-    const FloatingButtonState(false, false),
+    const FloatingButtonState(false, false, false),
   ),
 );
 
@@ -53,6 +53,14 @@ class FloatingButtonStateNotifier extends StateNotifier<FloatingButtonState> {
       return;
     }
     state = state.copyWith(isSmall: isSmall);
+  }
+
+  void hideButton() {
+    state = state.copyWith(isHided: true);
+  }
+
+  void showButton() {
+    state = state.copyWith(isHided: false);
   }
 }
 
