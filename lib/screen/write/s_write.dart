@@ -54,11 +54,11 @@ class _WriteScreenState extends ConsumerState<WriteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: '내 물건 팔기'.text.bold.make(),
+        title: 'sell_my_thing'.tr().text.bold.make(),
         actions: [
           Tap(
             onTap: () {},
-            child: '임시저장'.text.make().p(15),
+            child: 'temp_save'.tr().text.make().p(15),
           ),
         ],
       ),
@@ -359,7 +359,7 @@ class _PriceEditorState extends State<_PriceEditor> {
           keyboardType: TextInputType.number,
           enabled: !isDonateMode,
           decoration: InputDecoration(
-            hintText: '₩ 가격을 입력해주세요.',
+            hintText: 'input_price'.tr(namedArgs: { 'test': '홍길동' }),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.orange,
