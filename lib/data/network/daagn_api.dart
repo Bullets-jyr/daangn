@@ -16,7 +16,8 @@ class DaangnApi {
 
   static Future<SimpleResult<List<DaangnNotification>, ApiError>>
       getNotification() async {
-    await sleepAsync(500.ms);
+    // await sleepAsync(500.ms);
+    await sleepAsync(1000.ms);
     return SimpleResult.success(notificationList);
   }
 

@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
+
+// import 'package:fast_app_base/common/dart/extension/num_extension.dart' hide IntExt;
+// import 'package:fast_app_base/common/dart/extension/num2_extension.dart';
 import 'package:fast_app_base/entity/post/vo_simple_product_post.dart';
 import 'package:fast_app_base/screen/dialog/d_color_bottom.dart';
 import 'package:fast_app_base/screen/dialog/d_message.dart';
@@ -31,8 +34,15 @@ class ProductPostItem extends StatelessWidget {
       //   },
       onTap: () {
         // 상세페이지
+        Nav.push(
+          PostDetailScreen(
+            post.id,
+          ),
+          durationMs: 800,
+        );
+
         // context.go('/main/localLife/${post.id}');
-        context.go('/main/localLife/${post.id}', extra: post);
+        // context.go('/main/localLife/${post.id}', extra: post);
 
         // Nav.push(
         //   // // Nav.pushReplacement(
@@ -65,12 +75,16 @@ class ProductPostItem extends StatelessWidget {
               ClipRRect(
                 // borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10),),
                 borderRadius: BorderRadius.circular(10),
-                child: Hero(
-                  tag: '${post.id}_${post.product.images[0]}',
-                  child: CachedNetworkImage(
-                    imageUrl: post.product.images[0],
-                    width: 150,
-                  ),
+                // child: Hero(
+                //   tag: '${post.id}_${post.product.images[0]}',
+                //   child: CachedNetworkImage(
+                //     imageUrl: post.product.images[0],
+                //     width: 150,
+                //   ),
+                // ),
+                child: CachedNetworkImage(
+                  imageUrl: post.product.images[0],
+                  width: 150,
                 ),
               ),
               Width(10),
@@ -80,12 +94,15 @@ class ProductPostItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // post.content.text.size(17).bold.make(),
-                    Hero(
-                      tag: '${post.id}_title',
-                      // child: post.title.text.size(17).bold.make(),
-                      child: Material(
-                        child: post.title.text.size(17).bold.make(),
-                      ),
+                    // Hero(
+                    //   tag: '${post.id}_title',
+                    //   // child: post.title.text.size(17).bold.make(),
+                    //   child: Material(
+                    //     child: post.title.text.size(17).bold.make(),
+                    //   ),
+                    // ),
+                    Material(
+                      child: post.title.text.size(17).bold.make(),
                     ),
                     Row(
                       children: [
@@ -93,15 +110,20 @@ class ProductPostItem extends StatelessWidget {
                             .color(context.appColors.lessImportant)
                             .make(),
                         '•'.text.color(context.appColors.lessImportant).make(),
-                        timeago
-                            .format(post.createTime,
-                                locale: context.locale.languageCode)
+                        post
+                            .createTime
+                            .timeago
+                            // timeago
+                            //     .format(post.createTime, locale: context.locale.languageCode)
                             .text
                             .color(context.appColors.lessImportant)
                             .make(),
                       ],
                     ),
+                    // IntExt(post.product.price).toWon().text.bold.make(),
+                    // A member named 'toWon' is defined in extension 'IntExt' and extension 'IntExt2', and none are more specific.
                     post.product.price.toWon().text.bold.make(),
+                    // IntExt2(post.product.price).toWon().text.bold.make(),
                   ],
                 ),
               ),
