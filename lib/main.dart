@@ -19,12 +19,17 @@ void main() async {
   );
 
   setLocaleMessages('ko', KoMessages());
-  runApp(EasyLocalization(
+  runApp(
+    EasyLocalization(
       // supportedLocales: const [Locale('en'), Locale('ko')],
       supportedLocales: const [Locale('ko'), Locale('en')],
       // fallbackLocale: const Locale('en'),
       fallbackLocale: const Locale('ko'),
       path: 'assets/translations',
       useOnlyLangCode: true,
-      child: ProviderScope(child: const App())));
+      child: const CustomThemeApp(
+        child: App(),
+      ),
+    ),
+  );
 }
