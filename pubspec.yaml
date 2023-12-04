@@ -66,11 +66,11 @@ dependencies:
   cached_network_image: ^3.3.0
 
   #ui - util
-  keyboard_utils_fork: ^0.0.4
-  #keyboard_utils_fork:
-    #git:
-      #url: https://github.com/BansookNam/keyboard_utils.git
-      #ref: 'master'
+  #keyboard_utils_fork: ^0.0.4
+  keyboard_utils_fork:
+    git:
+      url: https://github.com/BansookNam/keyboard_utils.git
+      ref: 'master'
 
   #network
   dio: ^5.0.0
